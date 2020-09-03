@@ -1,0 +1,15 @@
+body {
+  background-color: #e2dad0;
+}
+
+h1 {
+  /* color: #044f6d; */
+  color: #036e99;
+  /* color: #017fb1; */
+}
+.main-img {
+  margin: auto;
+}
+img {
+  max-width: 100%
+}
