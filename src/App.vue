@@ -6,11 +6,18 @@
       <div class="main-img">
         <img src="./assets/trinidad.png">
       </div>
+
+      <navigation></navigation>
+
+      <router-view></router-view>
+
     </div>
   </div>
 </template>
 
 <script>
+  import Navigation from './components/Navigation.vue'
+  import Quotes from './components/Quotes.vue'
 
 export default {
   name: 'app',
@@ -18,6 +25,11 @@ export default {
     return {
       msg: 'Welcome to my Page',
     }
+  },
+  components: {
+    navigation: Navigation,
+    quote: Quotes
+
   }
 }
 </script>
@@ -47,6 +59,7 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #036e99;
+  font-weight: bold;
 }
 </style>

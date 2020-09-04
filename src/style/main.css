@@ -2,11 +2,28 @@ body {
   background-color: #e2dad0;
 }
 
+.blue {
+  color: #036e99;
+}
+
+.nav {
+  margin: 20px 0;
+}
+
+.nav li {
+  font-size: 22px;
+}
+
+
 h1 {
   /* color: #044f6d; */
   color: #036e99;
   /* color: #017fb1; */
 }
+
+
+
+
 .main-img {
   margin: auto;
 }
