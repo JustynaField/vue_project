@@ -28,10 +28,14 @@
         console.log('tasks:', this.tasks);
         this.tasks.unshift(this.newTask);
         this.$emit('taskWasPosted', this.newTask);
-        this.newTask = ''
+        this.newTask = '';
+        this.saveTasks();
+      },
+      saveTasks () {
+        const parsed = JSON.stringify(this.tasks);
+        localStorage.setItem('storedTasks', parsed);
       }
     }
-
   }
 
 </script>

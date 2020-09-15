@@ -20,12 +20,13 @@
 
     methods: {
       deleteTask (note) {
-        this.tasks.splice(note, 1)
+        this.tasks.splice(note, 1);
+        this.saveTasks();
+      },
+      saveTasks () {
+        const parsed = JSON.stringify(this.tasks);
+        localStorage.setItem('storedTasks', parsed);
       }
-    },
-
-    mounted () {
-      console.log('tasks in TaskList: ', this.tasks)
     }
   }
 </script>
@@ -51,7 +52,6 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
-
   }
 
 </style>

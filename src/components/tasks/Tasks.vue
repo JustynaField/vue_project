@@ -29,6 +29,11 @@
     components: {
       createTask: CreateTask,
       taskList: TaskList
+    },
+    mounted() {
+      if (localStorage.storedTasks) {
+        this.taskList = JSON.parse(localStorage.storedTasks)
+      }
     }
   }
 </script>
