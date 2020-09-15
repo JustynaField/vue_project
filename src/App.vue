@@ -2,20 +2,18 @@
   <div id="app">
     <div class="container">
 
-      <h1>{{ msg }}</h1>
-      <div class="main-img">
-        <img src="./assets/trinidad.png">
+      <div class="main-page">
+        <router-view></router-view>
       </div>
-
       <navigation></navigation>
 
-      <router-view></router-view>
 
     </div>
   </div>
 </template>
 
 <script>
+  import Home from './components/Home.vue'
   import Navigation from './components/Navigation.vue'
   import Quotes from './components/Quotes.vue'
 
@@ -23,10 +21,11 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to my Page',
+
     }
   },
   components: {
+    home: Home,
     navigation: Navigation,
     quote: Quotes
 
@@ -42,10 +41,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-h2 {
-  font-weight: normal;
 }
 
 ul {
