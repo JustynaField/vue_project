@@ -15,7 +15,7 @@
 <script>
   import Home from './components/Home.vue'
   import Navigation from './components/Navigation.vue'
-  import Quotes from './components/Quotes.vue'
+
 
 export default {
   name: 'app',
@@ -26,8 +26,7 @@ export default {
   },
   components: {
     home: Home,
-    navigation: Navigation,
-    quote: Quotes
+    navigation: Navigation
 
   }
 }
