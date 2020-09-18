@@ -1,10 +1,12 @@
 <template>
-  <div class="">
+  <div class="poster" v-if="renderComponent">
     <img class="poster-img" :src="loadImgUrl()" alt="Inspirational Image">
     <h1 class="poster-title">{{ loadTitle() }}</h1>
     <h3 class="poster-quote">{{ loadQuote() }}</h3>
 
-    
+    <div class="buttons">
+      <button @click="refresh()">New Quote</button>
+    </div>
   </div>
 </template>
 
@@ -16,7 +18,7 @@
   export default {
     data () {
       return {
-
+        renderComponent: true,
       }
     },
 
@@ -24,7 +26,6 @@
       getRandomIndex(array) {
         return Math.floor(Math.random() * array.length);
       },
-
       loadImgUrl () {
         let imgIndex = this.getRandomIndex(images);
         let imageSrc =  images[imgIndex];
@@ -39,10 +40,25 @@
         let quoteIndex = this.getRandomIndex(quotes);
         let randomQuote =quotes[quoteIndex];
         return randomQuote;
+      },
+      refresh () {
+        console.log('Refreshing');
+        this.renderComponent = false;
+
+        this.$nextTick(() => {
+          this.renderComponent = true;
+        })
+        // this.loadImgUrl();
+        // this.loadTitle();
+        // this.loadQuote();
       }
 
+    },
+
+    watch: {
 
     },
+
     mounted () {
     }
   }
@@ -61,7 +77,7 @@
 .poster-title,
 .poster-quote {
   line-height: 1;
-  width: 90%;
+  width: 70%;
   margin: auto;
   margin-top: 20px;
 }
@@ -73,4 +89,16 @@
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+
+.buttons {
+  margin-top: 25px;
+}
+
+button {
+  padding: 8px 15px;
+  background-color: #d8d1c9;
+  color: #036e99;
+  font-weight: bold
+}
+
 </style>
