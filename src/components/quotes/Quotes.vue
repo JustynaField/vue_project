@@ -1,11 +1,25 @@
 <template>
-  <div class="poster" v-if="renderComponent">
-    <img class="poster-img" :src="loadImgUrl()" alt="Inspirational Image">
-    <h1 class="poster-title">{{ loadTitle() }}</h1>
-    <h3 class="poster-quote">{{ loadQuote() }}</h3>
+  <div>
+    <div class="quote-page poster" v-if="renderMainComponent">
+      <img class="poster-img" :src="loadImgUrl()" alt="Inspirational Image">
+      <h1 class="poster-title">{{ loadTitle() }}</h1>
+      <h3 class="poster-quote">{{ loadQuote() }}</h3>
+    </div>
+
+    <div class="quote-page" v-if="savedQuotes">
+      <h3>Create your own motivational poster</h3>
+    </div>
+
+    <div class="quote-page" v-if="posterPage">
+      <h3>Saved Quotes</h3>
+    </div>
+
 
     <div class="buttons">
       <button @click="refresh()">New Quote</button>
+      <button>Save</button>
+      <button @click="showSaved">Show Saved Quotes</button>
+      <button @click="makePoster">Make Your Own Poster</button>
     </div>
   </div>
 </template>
@@ -18,7 +32,9 @@
   export default {
     data () {
       return {
-        renderComponent: true,
+        renderMainComponent: true,
+        savedQuotes: false,
+        posterPage: false
       }
     },
 
@@ -42,20 +58,25 @@
         return randomQuote;
       },
       refresh () {
-        console.log('Refreshing');
-        this.renderComponent = false;
+        this.renderMainComponent = false;
 
         this.$nextTick(() => {
-          this.renderComponent = true;
-        })
-        // this.loadImgUrl();
-        // this.loadTitle();
-        // this.loadQuote();
+          this.renderMainComponent = true;
+          this.savedQuotes = false;
+          this.posterPage = false;
+        });
+      },
+
+      showSaved () {
+        this.savedQuotes = true;
+        this.renderMainComponent = false;
+        this.posterPage = false;
+      },
+      makePoster () {
+        this.posterPage = true;
+        this.renderMainComponent = false;
+        this.savedQuotes = false;
       }
-
-    },
-
-    watch: {
 
     },
 
@@ -66,6 +87,10 @@
 
 
 <style>
+.quote-page {
+  height: 665px;
+}
+
 .poster-img {
   background-size: cover;
   border: 3px solid #036e99;;
@@ -90,15 +115,17 @@
   text-transform: uppercase;
 }
 
-.buttons {
-  margin-top: 25px;
+.poster-quote {
+  height: 65px;
 }
 
 button {
   padding: 8px 15px;
   background-color: #d8d1c9;
+  border: 2px solid gray;
   color: #036e99;
-  font-weight: bold
+  font-weight: bold;
+  margin: 25px 10px;
 }
 
 </style>
