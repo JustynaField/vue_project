@@ -1,25 +1,40 @@
 <template>
   <div>
     <div class="quote-page poster" v-if="renderMainComponent">
-      <img class="poster-img" :src="loadImgUrl()" alt="Inspirational Image">
-      <h1 class="poster-title">{{ loadTitle() }}</h1>
-      <h3 class="poster-quote">{{ loadQuote() }}</h3>
-    </div>
-
-    <div class="quote-page" v-if="savedQuotes">
-      <h3>Create your own motivational poster</h3>
+      <img class="poster-img" :src="loadImgUrl ()" alt="Inspirational Image">
+      <h1 class="poster-title">{{ title }}</h1>
+      <h3 class="poster-quote">{{ quote }}</h3>
     </div>
 
     <div class="quote-page" v-if="posterPage">
+      <h3>Create your own motivational poster</h3>
+      <form class="">
+        <div class="form-group">
+          <label for="">Image Url</label>
+          <input class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Motivational poster title</label>
+          <input class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">Motivational poster quote</label>
+          <input class="form-control">
+        </div>
+        <button>Show My Poster</button>
+      </form>
+    </div>
+
+    <div class="quote-page" v-if="savedQuotes">
       <h3>Saved Quotes</h3>
     </div>
 
 
     <div class="buttons">
-      <button @click="refresh()">New Quote</button>
-      <button>Save</button>
-      <button @click="showSaved">Show Saved Quotes</button>
-      <button @click="makePoster">Make Your Own Poster</button>
+      <button @click="refresh()" class="quote-btn">New Quote</button>
+      <button @click="savePoster()" class="quote-btn">Save</button>
+      <button @click="showSaved" class="quote-btn">Saved Quotes</button>
+      <button @click="makePoster" class="quote-btn">Make Your Own Poster</button>
     </div>
   </div>
 </template>
@@ -34,7 +49,12 @@
       return {
         renderMainComponent: true,
         savedQuotes: false,
-        posterPage: false
+        posterPage: false,
+
+        title: '',
+        quote: '',
+        url: './quoteImgs/bees.png',
+        savedPosters: []
       }
     },
 
@@ -45,26 +65,34 @@
       loadImgUrl () {
         let imgIndex = this.getRandomIndex(images);
         let imageSrc =  images[imgIndex];
-        return require(`./quoteImgs/${imageSrc}`)
+        return this.url = require(`./quoteImgs/${imageSrc}`);
       },
       loadTitle () {
         let titleIndex = this.getRandomIndex(titles);
         let randomTitle = titles[titleIndex];
-        return randomTitle;
+        this.title = randomTitle;
       },
       loadQuote () {
         let quoteIndex = this.getRandomIndex(quotes);
-        let randomQuote =quotes[quoteIndex];
-        return randomQuote;
+        let randomQuote = quotes[quoteIndex];
+        this.quote = randomQuote;
       },
       refresh () {
-        this.renderMainComponent = false;
-
-        this.$nextTick(() => {
-          this.renderMainComponent = true;
-          this.savedQuotes = false;
-          this.posterPage = false;
-        });
+        this.loadTitle ();
+        this.loadQuote ();
+        console.log('title: ', this.title);
+        console.log('title: ', this.quote);
+        console.log('url: ', this.url);
+        // this.renderMainComponent = false;
+        //
+        // this.$nextTick(() => {
+        //   this.renderMainComponent = true;
+        //   this.savedQuotes = false;
+        //   this.posterPage = false;
+        // });
+        this.renderMainComponent = true;
+        this.savedQuotes = false;
+        this.posterPage = false;
       },
 
       showSaved () {
@@ -76,12 +104,21 @@
         this.posterPage = true;
         this.renderMainComponent = false;
         this.savedQuotes = false;
+      },
+
+      savePoster () {
+        console.log('Clicking that button', this.loadTitle());
       }
 
     },
 
     mounted () {
-    }
+      this.loadTitle ();
+      this.loadQuote ();
+
+    },
+
+
   }
 </script>
 
@@ -119,13 +156,19 @@
   height: 65px;
 }
 
-button {
+.quote-btn {
   padding: 8px 15px;
   background-color: #d8d1c9;
   border: 2px solid gray;
   color: #036e99;
   font-weight: bold;
   margin: 25px 10px;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 50px;
 }
 
 </style>
