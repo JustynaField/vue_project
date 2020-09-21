@@ -22,13 +22,15 @@
       <img class="myImg" :src="myImg" alt="Inspirational Image">
       <h1 class="poster-title">{{ myTitle }}</h1>
       <h3 class="poster-quote">{{ myQuote }}</h3>
-      <button class="myQuoteBtn" @click="savePoster">Save my Poster</button>
+      <button class="myQuoteBtn" @click="saveMyPoster">Save my Poster</button>
     </div>
   </div>
 </template>
 
 <script>
   export default {
+    props: ['savedPosters'],
+
     data () {
       return {
         showFormPage: true,
@@ -43,6 +45,9 @@
         this.showFormPage = false;
         this.showPosterPage = true;
         console.log('myTitle ', this.myTitle)
+      },
+      saveMyPoster () {
+        this.savedPosters.unshift({title: this.myTitle, quote: this.myQuote, url: this.myImg})
       }
     }
   }

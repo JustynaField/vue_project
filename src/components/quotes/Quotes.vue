@@ -7,7 +7,7 @@
     </div>
 
     <div class="quote-page" v-if="posterPage">
-      <create-poster></create-poster>
+      <create-poster :savedPosters="favoritePosters"></create-poster>
     </div>
 
     <div class="quote-page" v-if="savedQuotes">
