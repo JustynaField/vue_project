@@ -4,7 +4,6 @@
       <img class="mini-poster-img" :src="poster.url">
       <h6>{{poster.title}}</h6>
       <p>{{poster.quote}}</p>
-      change
     </div>
   </div>
 </template>
