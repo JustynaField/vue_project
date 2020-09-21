@@ -10,11 +10,7 @@
 
 <script>
   export default {
-    props: ['savedPosters'],
-
-    mounted () {
-      console.log('hello')
-    }
+    props: ['savedPosters']
   }
 </script>
 

@@ -7,29 +7,13 @@
     </div>
 
     <div class="quote-page" v-if="posterPage">
-      <h3>Create your own motivational poster</h3>
-      <form class="">
-        <div class="form-group">
-          <label for="">Image Url</label>
-          <input class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="">Motivational poster title</label>
-          <input class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="">Motivational poster quote</label>
-          <input class="form-control">
-        </div>
-        <button class="quote-btn">Show My Poster</button>
-      </form>
+      <create-poster></create-poster>
     </div>
 
     <div class="quote-page" v-if="savedQuotes">
       <h3>Saved Quotes</h3>
       <saved-posters :savedPosters="favoritePosters"></saved-posters>
     </div>
-
 
     <div class="buttons">
       <button @click="refresh()" class="quote-btn">New Quote</button>
@@ -45,6 +29,7 @@
   import { titles } from "./sources.js"
   import { quotes } from "./sources.js"
   import SavedPosters from './SavedPosters'
+  import CreatePoster from './CreatePoster'
 
   export default {
     data () {
@@ -57,12 +42,13 @@
         quote: '',
         url: '',
 
-        favoritePosters: []
+        favoritePosters: [],
       }
     },
 
     components: {
-      savedPosters: SavedPosters
+      savedPosters: SavedPosters,
+      createPoster: CreatePoster
     },
 
     methods: {
@@ -118,7 +104,8 @@
 
         } else {
 
-          this.favoritePosters.unshift({title: this.title, quote: this.quote, url: this.url})
+          this.favoritePosters.unshift({title: this.title, quote: this.quote, url: this.url});
+          alert('Saved!');
         }
         console.log('favoritePosters: ', this.favoritePosters);
       }
