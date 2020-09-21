@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="quote-page poster" v-if="renderMainComponent">
+    <div class="quote-page" v-if="renderMainComponent">
       <img class="poster-img" :src="loadImgUrl ()" alt="Inspirational Image">
       <h1 class="poster-title">{{ title }}</h1>
       <h3 class="poster-quote">{{ quote }}</h3>
@@ -21,19 +21,20 @@
           <label for="">Motivational poster quote</label>
           <input class="form-control">
         </div>
-        <button>Show My Poster</button>
+        <button class="quote-btn">Show My Poster</button>
       </form>
     </div>
 
     <div class="quote-page" v-if="savedQuotes">
       <h3>Saved Quotes</h3>
+      <saved-posters :savedPosters="favoritePosters"></saved-posters>
     </div>
 
 
     <div class="buttons">
       <button @click="refresh()" class="quote-btn">New Quote</button>
       <button @click="savePoster()" class="quote-btn">Save</button>
-      <button @click="showSaved" class="quote-btn">Saved Quotes</button>
+      <button @click="showSaved" class="quote-btn">Saved Posters</button>
       <button @click="makePoster" class="quote-btn">Make Your Own Poster</button>
     </div>
   </div>
@@ -43,6 +44,7 @@
   import { images } from "./sources.js"
   import { titles } from "./sources.js"
   import { quotes } from "./sources.js"
+  import SavedPosters from './SavedPosters'
 
   export default {
     data () {
@@ -53,9 +55,14 @@
 
         title: '',
         quote: '',
-        url: './quoteImgs/bees.png',
-        savedPosters: []
+        url: '',
+
+        favoritePosters: []
       }
+    },
+
+    components: {
+      savedPosters: SavedPosters
     },
 
     methods: {
@@ -80,9 +87,7 @@
       refresh () {
         this.loadTitle ();
         this.loadQuote ();
-        console.log('title: ', this.title);
-        console.log('title: ', this.quote);
-        console.log('url: ', this.url);
+
         // this.renderMainComponent = false;
         //
         // this.$nextTick(() => {
@@ -107,7 +112,15 @@
       },
 
       savePoster () {
-        console.log('Clicking that button', this.loadTitle());
+
+        if (this.favoritePosters.indexOf({title: this.title, quote: this.quote, url: this.url}) !== -1) {
+          alert('Value exists')
+
+        } else {
+
+          this.favoritePosters.unshift({title: this.title, quote: this.quote, url: this.url})
+        }
+        console.log('favoritePosters: ', this.favoritePosters);
       }
 
     },
