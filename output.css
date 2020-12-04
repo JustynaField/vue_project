@@ -1,0 +1,19 @@
+body {
+  background: #e2dad0; }
+
+h1, p {
+  color: #036e99; }
+
+.main-page {
+  height: 750px; }
+  .main-page .main-img {
+    margin: auto; }
+  .main-page img {
+    max-width: 100%; }
+
+.nav {
+  margin: 20px 0; }
+  .nav li {
+    font-size: 22px; }
+
+/*# sourceMappingURL=output.css.map */

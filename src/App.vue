@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style>
+/* @import './style/main.scss'; */
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
